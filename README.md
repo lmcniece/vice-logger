@@ -38,6 +38,7 @@ or
 
 ## Documentation
 
+* [Heroku Ember.js Buildpack](https://github.com/heroku/heroku-buildpack-emberjs)
 * [ember.js](http://emberjs.com/)
 * [ember-cli](http://www.ember-cli.com/)
 * Development Browser Extensions
