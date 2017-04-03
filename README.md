@@ -9,8 +9,8 @@ A barebones Ember.js app, which can easily be deployed to Heroku.
 You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
+* [Node.js](http://nodejs.org/)
+* [Yarn](https://yarnpkg.com/lang/en/docs/install/)
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
 
@@ -19,8 +19,7 @@ You will need the following things properly installed on your computer.
 ```sh
 $ git clone git@github.com:heroku/ember-js-getting-started.git
 $ cd ember-js-getting-started
-$ npm install
-$ bower install
+$ yarn install
 $ ember server
 ```
 Your app should now be running on [localhost:4200](http://localhost:4200/).
