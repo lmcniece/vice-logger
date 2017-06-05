@@ -8,10 +8,9 @@ A barebones Ember.js app, which can easily be deployed to Heroku.
 
 You will need the following things properly installed on your computer.
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/)
-* [Yarn](https://yarnpkg.com/lang/en/docs/install/)
-* [Ember CLI](http://www.ember-cli.com/)
+* [Git](https://git-scm.com/)
+* [Node.js](https://nodejs.org/) (with NPM)
+* [Ember CLI](https://ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
 
 ## Running Locally
@@ -38,8 +37,8 @@ or
 ## Documentation
 
 * [Heroku Ember.js Buildpack](https://github.com/heroku/heroku-buildpack-emberjs)
-* [ember.js](http://emberjs.com/)
-* [ember-cli](http://www.ember-cli.com/)
+* [ember.js](https://emberjs.com/)
+* [ember-cli](https://www.ember-cli.com/)
 * Development Browser Extensions
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
