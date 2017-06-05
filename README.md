@@ -1,6 +1,6 @@
 # ember-js-getting-started
 
-A barebones Ember.js app, which can easily be deployed to Heroku.
+A barebones Ember.js app, which can easily be deployed to Heroku using the open source [Heroku Ember Buildpack](https://github.com/heroku/heroku-buildpack-emberjs).
 
 **This app is deployed as a static app, if you would like to try a one click deploy of a FastBoot app check out [this branch](https://github.com/heroku/ember-js-getting-started/tree/fastboot).**
 
