@@ -7,6 +7,14 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+    
+    // Friends area
+    this.route('friends');
+    this.route('melissa', { path: '/friends/melissa' });
+    this.route('alla', { path: '/friends/alla' });
+    this.route('logan', { path: '/friends/logan' });
+    this.route('melanie', { path: '/friends/melanie' });
+    
 });
 
 export default Router;

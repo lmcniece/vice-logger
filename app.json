@@ -1,9 +1,9 @@
 {
-  "name": "Ember.js Getting Started",
-  "description": "A sample Ember.js app deployed to Heroku",
-  "repository": "https://github.com/heroku/ember-js-getting-started",
+  "name": "Vice Log",
+  "description": "A social log of all our worst decisions.",
+  "repository": "https://github.com/lmcniece/vice-logger",
   "logo": "https://heroku-www-files.s3.amazonaws.com/getting-started/ember.svg",
-  "keywords": ["ember.js", "static"],
+  "keywords": ["ember.js"],
   "buildpacks": [
     { "url": "https://codon-buildpacks.s3.amazonaws.com/buildpacks/heroku/emberjs.tgz" }
   ]
