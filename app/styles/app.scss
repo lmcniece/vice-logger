@@ -1,0 +1,21 @@
+@import "variables";
+@import "ember-bootstrap/bootstrap";
+
+body{
+    .navbar-default{
+        background-color: $primary-color;
+    }
+    .navbar-default .navbar-brand{
+        color: $secondary-color;
+    }
+    .navbar-default .navbar-nav > li > a {
+        color: $tertiary-color;
+    }
+    .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+        color: $secondary-color;
+    }
+    .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+        background-color: $primary-color;
+        color: $secondary-color;
+    }
+}
