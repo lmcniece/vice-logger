@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'ember-js-getting-started',
+    modulePrefix: 'vice-logger',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
