@@ -1,7 +1,7 @@
 {
-  "name": "ember-js-getting-started",
+  "name": "vice-logger",
   "version": "0.0.0",
-  "description": "Small description for ember-js-getting-started goes here",
+  "description": "Small description for vice-logger goes here",
   "private": true,
   "directories": {
     "doc": "doc",
