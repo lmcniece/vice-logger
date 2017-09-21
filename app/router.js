@@ -7,11 +7,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-    
-    // Friends area
-    this.route('users');
-    this.route('user', { path: '/users/:userId' });
-    
+  this.route('historical-investments');
 });
 
 export default Router;
