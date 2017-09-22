@@ -10,5 +10,11 @@ export default DS.Model.extend({
     fees: DS.attr(),
     withdrawals: DS.attr(),
     deposits: DS.attr(),
-    account: DS.attr()
+    account: DS.attr(),
+    quarter: function() {
+        return Math.trunc(((this.get('month')-1)/3) + 1);
+    }.property('month'),
+    isLastMonthOfQuarter: function(){
+        return (this.get('month') % 3 === 0);
+    }.property('month')
 });
