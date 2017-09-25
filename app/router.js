@@ -7,7 +7,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-    this.route('historical-investments');
+    this.route('account-records');
 });
 
 export default Router;
