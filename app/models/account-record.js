@@ -11,11 +11,5 @@ export default DS.Model.extend({
     withdrawals: DS.attr(),
     deposits: DS.attr(),
     account: DS.attr(),
-    account_type: DS.attr(),
-    quarter: function() {
-        return Math.trunc(((this.get('month')-1)/3) + 1);
-    }.property('month'),
-    isLastMonthOfQuarter: function(){
-        return (this.get('month') % 3 === 0);
-    }.property('month')
+    account_type: DS.attr()
 });
