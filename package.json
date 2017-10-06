@@ -47,7 +47,6 @@
     "morgan": "^1.3.2"
   },
   "dependencies": {
-    "ember-lodash": "^4.17.5",
     "lodash": "^4.17.4"
   }
 }

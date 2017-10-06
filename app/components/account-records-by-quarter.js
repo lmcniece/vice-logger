@@ -1,12 +1,10 @@
 import Ember from 'ember';
-import _ from 'lodash';
 
 export default Ember.Component.extend({
     xAxisLabels: function(){
         let labels = this.get('quarterlyAccountRecords').map(function(record){
             return record.get('year')+'-Q'+record.get('quarter');
         }).uniq();
-        labels.pop();
         return labels;
     }.property('quarterlyAccountRecords'),
     brokerageData: function(){
@@ -57,6 +55,18 @@ export default Ember.Component.extend({
         let dataArray = Object.assign(labels, records);
         return Object.values(dataArray);
     }.property('quarterlyAccountRecords', 'xAxisLabels'),
+    hsaData: function(){
+        let labels = {};
+        this.get('xAxisLabels').forEach(function(label){
+             labels[label]=0;
+        });
+        let records = {};
+        this.get('quarterlyAccountRecords').filterBy('account_type','hsa').forEach(function(record){
+                records[record.get('year')+'-Q'+record.get('quarter')] = record.get('balance_end');
+        });
+        let dataArray = Object.assign(labels, records);
+        return Object.values(dataArray);
+    }.property('quarterlyAccountRecords', 'xAxisLabels'),
     chartOptions: {
         spanGaps: true
     },
@@ -82,6 +92,11 @@ export default Ember.Component.extend({
                 label: "Cash",
                 data: this.get('cashData'),
                 borderColor: 'green',
+                fill: false
+            },{
+                label: "HSA",
+                data: this.get('hsaData'),
+                borderColor: 'white',
                 fill: false
             }]
         }
