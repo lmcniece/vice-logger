@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import generateChartData from '../utils/generate-chart-data';
 
 export default Ember.Component.extend({
     xAxisLabels: function(){
@@ -20,18 +21,7 @@ export default Ember.Component.extend({
                                         return [3,6,9,12].includes(record.get('month'));
                                     })
                                     .sortBy('year','month')
-        let dataArray = []; //main array we will return
-        accountTypes.forEach(function(accountType){
-            let records = {};
-            //Deep clone the labels to each account type of the array
-            dataArray[accountType] = JSON.parse(JSON.stringify(labels));
-            quarterlyRecords.filterBy('account_type',accountType)
-                .forEach(function(record){
-                    records[record.get('yearQuarterLabel')] = record.get('balance_end');
-                });
-            Object.assign(dataArray[accountType], records);
-        })
-        return dataArray;
+        return generateChartData(accountTypes,labels,quarterlyRecords,'balance_end');
     }.property('accountRecords', 'xAxisLabels'),
     chartOptions: {
         spanGaps: true

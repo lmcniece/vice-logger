@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import generateChartData from '../utils/generate-chart-data';
 
 export default Ember.Component.extend({
     xAxisLabels: function(){
@@ -7,8 +8,6 @@ export default Ember.Component.extend({
         }).uniq();
         return labels;
     }.property('accountRecords'),
-    
-    
     quarterlyAccountData: function(){
         //Generate an object of all labels - will be used to fill/offset account types with null records
         let labels = {};
@@ -16,19 +15,9 @@ export default Ember.Component.extend({
              labels[label]=0;
         });
         let accountTypes = this.get('accountRecords').mapBy('account_type').uniq();
-        let accountRecords = this.get('accountRecords').sortBy('year','quarter');
+        let quarterlyRecords = this.get('accountRecords').sortBy('year','quarter');
         let dataArray = []; //main array we will return
-        accountTypes.forEach(function(accountType){
-            let records = {};
-            dataArray[accountType] = JSON.parse(JSON.stringify(labels)); //Deep clone the labels to each account type of the array
-            accountRecords.filterBy('account_type',accountType)
-                .forEach(function(record){
-                    if(!records[record.get('yearQuarterLabel')]){records[record.get('yearQuarterLabel')] = 0;}
-                    records[record.get('yearQuarterLabel')] += record.get('net');
-                });
-            Object.assign(dataArray[accountType], records);
-        })
-        return dataArray;
+        return generateChartData(accountTypes,labels,quarterlyRecords,'net');
     }.property('accountRecords', 'xAxisLabels'),
     chartOptions: {
         scales: {
