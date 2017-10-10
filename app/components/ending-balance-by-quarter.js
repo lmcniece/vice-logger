@@ -14,44 +14,52 @@ export default Ember.Component.extend({
         this.get('xAxisLabels').forEach(function(label){
              labels[label]=0;
         });
+        //Generate Records Object
         let accountTypes = this.get('accountRecords').mapBy('account_type').uniq();
-        let quarterlyRecords = this.get('accountRecords').sortBy('year','quarter');
-        let dataArray = []; //main array we will return
-        return generateChartData(accountTypes,labels,quarterlyRecords,'net');
+        let quarterlyRecords = this.get('accountRecords')
+                                    .filter(function(record){
+                                        return [3,6,9,12].includes(record.get('month'));
+                                    })
+                                    .sortBy('year','month')
+        return generateChartData(accountTypes,labels,quarterlyRecords,'balance_end');
     }.property('accountRecords', 'xAxisLabels'),
     chartOptions: {
-        scales: {
-            xAxes: [{
-                stacked: true
-            }],
-            yAxes: [{
-                stacked: true
-            }]
-        }
+        title: {
+            display: true,
+            text: 'Ending Balances',
+            fontColor: '#ccc',
+            fontSize: 16
+        },
+        spanGaps: true
     },
-    chartData: Ember.computed('accountRecords', function(){
+    chartData: Ember.computed('quarterlyAccountData', function(){
         return {
             labels: this.get('xAxisLabels'),
             datasets: [{
                 label: "Brokerage",
                 data: Object.values(this.get('quarterlyAccountData')['brokerage']),
-                backgroundColor: 'yellow'
+                borderColor: 'yellow',
+                fill: false
             },{
                 label: "Traditional",
                 data: Object.values(this.get('quarterlyAccountData')['traditional']),
-                backgroundColor: 'blue'
+                borderColor: 'blue',
+                fill: false
             },{
                 label: "Roth",
                 data: Object.values(this.get('quarterlyAccountData')['roth']),
-                backgroundColor: 'red'
+                borderColor: 'red',
+                fill: false
             },{
                 label: "Cash",
                 data: Object.values(this.get('quarterlyAccountData')['cash']),
-                backgroundColor: 'green'
+                borderColor: 'green',
+                fill: false
             },{
                 label: "HSA",
                 data: Object.values(this.get('quarterlyAccountData')['hsa']),
-                backgroundColor: 'white'
+                borderColor: 'white',
+                fill: false
             }]
         }
     })

@@ -20,6 +20,12 @@ export default Ember.Component.extend({
         return generateChartData(accountTypes,labels,quarterlyRecords,'roi');
     }.property('accountRecords', 'xAxisLabels'),
     chartOptions: {
+        title: {
+            display: true,
+            text: 'Investment ROI',
+            fontColor: '#ccc',
+            fontSize: 16
+        },
         scales: {
             xAxes: [{
                 stacked: true
