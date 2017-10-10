@@ -20,7 +20,9 @@ export default DS.Model.extend({
         return this.get('year')+'-Q'+this.get('quarter');
     }),
     net: Ember.computed('market_change','dividend_interest','fees','withdrawals','deposits', function() {
-        let net = this.get('market_change') + this.get('dividend_interest') + this.get('fees') - this.get('withdrawals') + this.get('deposits');
-        return Math.round(net * 100) / 100;
+        return this.get('market_change') + this.get('dividend_interest') + this.get('fees') - this.get('withdrawals') + this.get('deposits');
+    }),
+    roi: Ember.computed('market_change','dividend_interest','fees','withdrawals','deposits', function() {
+        return this.get('market_change') + this.get('dividend_interest') + this.get('fees');
     })
 });
