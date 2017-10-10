@@ -1,6 +1,6 @@
 {
   "name": "vice-logger",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Small description for vice-logger goes here",
   "private": true,
   "directories": {
@@ -14,8 +14,7 @@
   },
   "repository": "",
   "engines": {
-    "node": ">= 4",
-    "yarn": "0.24.6"
+    "node": ">= 4"
   },
   "author": "",
   "license": "MIT",
@@ -32,6 +31,7 @@
     "ember-cli-htmlbars": "^1.1.1",
     "ember-cli-htmlbars-inline-precompile": "^0.4.0",
     "ember-cli-inject-live-reload": "^1.4.1",
+    "ember-cli-moment-shim": "^3.5.0",
     "ember-cli-qunit": "^4.0.0",
     "ember-cli-sass": "^7.0.0",
     "ember-cli-shims": "^1.1.0",

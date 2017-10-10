@@ -2,100 +2,66 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     xAxisLabels: function(){
-        let labels = this.get('quarterlyAccountRecords').map(function(record){
+        let labels = this.get('accountRecords').sortBy('year','month').map(function(record){
             return record.get('year')+'-Q'+record.get('quarter');
         }).uniq();
         return labels;
-    }.property('quarterlyAccountRecords'),
-    brokerageData: function(){
+    }.property('accountRecords'),
+    quarterlyAccountData: function(){
+        //Generate an object of all labels - will be used to fill/offset account types with null records
         let labels = {};
         this.get('xAxisLabels').forEach(function(label){
              labels[label]=0;
         });
-        let records = {};
-        this.get('quarterlyAccountRecords').filterBy('account_type','brokerage').forEach(function(record){
-                records[record.get('year')+'-Q'+record.get('quarter')] = record.get('balance_end');
-        });
-        let dataArray = Object.assign(labels, records);
-        return Object.values(dataArray);
-    }.property('quarterlyAccountRecords', 'xAxisLabels'),
-    traditionalData: function(){
-        let labels = {};
-        this.get('xAxisLabels').forEach(function(label){
-             labels[label]=0;
-        });
-        let records = {};
-        this.get('quarterlyAccountRecords').filterBy('account_type','traditional').forEach(function(record){
-                records[record.get('year')+'-Q'+record.get('quarter')] = record.get('balance_end');
-        });
-        let dataArray = Object.assign(labels, records);
-        return Object.values(dataArray);
-    }.property('quarterlyAccountRecords', 'xAxisLabels'),
-    rothData: function(){
-        let labels = {};
-        this.get('xAxisLabels').forEach(function(label){
-             labels[label]=0;
-        });
-        let records = {};
-        this.get('quarterlyAccountRecords').filterBy('account_type','roth').forEach(function(record){
-                records[record.get('year')+'-Q'+record.get('quarter')] = record.get('balance_end');
-        });
-        let dataArray = Object.assign(labels, records);
-        return Object.values(dataArray);
-    }.property('quarterlyAccountRecords', 'xAxisLabels'),
-    cashData: function(){
-        let labels = {};
-        this.get('xAxisLabels').forEach(function(label){
-             labels[label]=0;
-        });
-        let records = {};
-        this.get('quarterlyAccountRecords').filterBy('account_type','cash').forEach(function(record){
-                records[record.get('year')+'-Q'+record.get('quarter')] = record.get('balance_end');
-        });
-        let dataArray = Object.assign(labels, records);
-        return Object.values(dataArray);
-    }.property('quarterlyAccountRecords', 'xAxisLabels'),
-    hsaData: function(){
-        let labels = {};
-        this.get('xAxisLabels').forEach(function(label){
-             labels[label]=0;
-        });
-        let records = {};
-        this.get('quarterlyAccountRecords').filterBy('account_type','hsa').forEach(function(record){
-                records[record.get('year')+'-Q'+record.get('quarter')] = record.get('balance_end');
-        });
-        let dataArray = Object.assign(labels, records);
-        return Object.values(dataArray);
-    }.property('quarterlyAccountRecords', 'xAxisLabels'),
+        //Generate Records Object
+        let accountTypes = this.get('accountRecords').mapBy('account_type').uniq();
+        let quarterlyRecords = this.get('accountRecords')
+                                    .filter(function(record){
+                                        return [3,6,9,12].includes(record.get('month'));
+                                    })
+                                    .sortBy('year','month')
+        let dataArray = []; //main array we will return
+        accountTypes.forEach(function(accountType){
+            let records = {};
+            //Deep clone the labels to each account type of the array
+            dataArray[accountType] = JSON.parse(JSON.stringify(labels));
+            quarterlyRecords.filterBy('account_type',accountType)
+                .forEach(function(record){
+                    records[record.get('yearQuarterLabel')] = record.get('balance_end');
+                });
+            Object.assign(dataArray[accountType], records);
+        })
+        return dataArray;
+    }.property('accountRecords', 'xAxisLabels'),
     chartOptions: {
         spanGaps: true
     },
-    chartData: Ember.computed('quarterlyAccountRecords', function(){
+    chartData: Ember.computed('quarterlyAccountData', function(){
         return {
             labels: this.get('xAxisLabels'),
             datasets: [{
                 label: "Brokerage",
-                data: this.get('brokerageData'),
+                data: Object.values(this.get('quarterlyAccountData')['brokerage']),
                 borderColor: 'yellow',
                 fill: false
             },{
                 label: "Traditional",
-                data: this.get('traditionalData'),
+                data: Object.values(this.get('quarterlyAccountData')['traditional']),
                 borderColor: 'blue',
                 fill: false
             },{
                 label: "Roth",
-                data: this.get('rothData'),
+                data: Object.values(this.get('quarterlyAccountData')['roth']),
                 borderColor: 'red',
                 fill: false
             },{
                 label: "Cash",
-                data: this.get('cashData'),
+                data: Object.values(this.get('quarterlyAccountData')['cash']),
                 borderColor: 'green',
                 fill: false
             },{
                 label: "HSA",
-                data: this.get('hsaData'),
+                data: Object.values(this.get('quarterlyAccountData')['hsa']),
                 borderColor: 'white',
                 fill: false
             }]

@@ -1,15 +1,26 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-    year: DS.attr(),
-    month: DS.attr(),
-    balance_start: DS.attr(),
-    balance_end: DS.attr(),
-    market_change: DS.attr(),
-    dividend_interest: DS.attr(),
-    fees: DS.attr(),
-    withdrawals: DS.attr(),
-    deposits: DS.attr(),
-    account: DS.attr(),
-    account_type: DS.attr()
+    year: DS.attr("number"),
+    month: DS.attr("number"),
+    balance_start: DS.attr("number"),
+    balance_end: DS.attr("number"),
+    market_change: DS.attr("number"),
+    dividend_interest: DS.attr("number"),
+    fees: DS.attr("number"),
+    withdrawals: DS.attr("number"),
+    deposits: DS.attr("number"),
+    account: DS.attr("string"),
+    account_type: DS.attr("string"),
+    quarter: Ember.computed('month', function() {
+        let month = this.get('month');
+        return (Math.ceil(month / 3));
+    }),
+    yearQuarterLabel: Ember.computed('year','quarter', function() {
+        return this.get('year')+'-Q'+this.get('quarter');
+    }),
+    net: Ember.computed('market_change','dividend_interest','fees','withdrawals','deposits', function() {
+        let net = this.get('market_change') + this.get('dividend_interest') + this.get('fees') - this.get('withdrawals') + this.get('deposits');
+        return Math.round(net * 100) / 100;
+    })
 });
