@@ -20,6 +20,10 @@
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/vice-logger.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script> 
+        //Global defaults for ChartJS
+        Chart.defaults.global.layout = { padding: {bottom:50, top:50} }
+    </script>
 
     {{content-for "body-footer"}}
   </body>

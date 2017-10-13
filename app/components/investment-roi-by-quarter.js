@@ -16,7 +16,6 @@ export default Ember.Component.extend({
         });
         let accountTypes = this.get('accountRecords').mapBy('account_type').uniq();
         let quarterlyRecords = this.get('accountRecords').sortBy('year','quarter');
-        let dataArray = []; //main array we will return
         return generateQuarterlyChartData(accountTypes,labels,quarterlyRecords,'roi');
     }.property('accountRecords', 'xAxisLabels'),
     chartOptions: {
