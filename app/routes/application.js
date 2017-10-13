@@ -5,5 +5,5 @@ export default Ember.Route.extend({
         return Ember.RSVP.hash({
             accountRecords: this.store.findAll('accountRecord')
         })
-    }
+    },
 });

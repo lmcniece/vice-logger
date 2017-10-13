@@ -38,7 +38,7 @@ export default Ember.Component.extend({
             datasets: [{
                 label: "Brokerage",
                 data: Object.values(this.get('quarterlyAccountData')['brokerage']),
-                borderColor: 'yellow',
+                borderColor: 'grey',
                 fill: false
             },{
                 label: "Traditional",
@@ -58,7 +58,7 @@ export default Ember.Component.extend({
             },{
                 label: "HSA",
                 data: Object.values(this.get('quarterlyAccountData')['hsa']),
-                borderColor: 'white',
+                borderColor: 'yellow',
                 fill: false
             }]
         }

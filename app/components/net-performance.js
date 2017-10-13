@@ -33,7 +33,7 @@ export default Ember.Component.extend({
         return {
             labels: ['brokerage','roth','traditional'],
             datasets: [{
-                backgroundColor: ['red','blue','green'],
+                backgroundColor: ['yellow','red','blue'],
                 data:this.get('assetData')
             }]
         }
