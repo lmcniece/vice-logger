@@ -11,6 +11,9 @@ App = Ember.Application.extend({
   Resolver
 });
 
+//Global defaults for ChartJS
+Chart.defaults.global.layout = { padding: {bottom:25} }
+
 loadInitializers(App, config.modulePrefix);
 
 export default App;

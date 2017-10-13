@@ -1,4 +1,4 @@
-export default function generateChartData(accountTypes,labels,quarterlyRecords,dataPoint) {
+export default function generateQuarterlyChartData(accountTypes,labels,quarterlyRecords,dataPoint) {
     let dataArray = []; //main array we will return
     accountTypes.forEach(function(accountType){
         let records = {};

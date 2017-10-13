@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import generateChartData from '../utils/generate-chart-data';
+import generateQuarterlyChartData from '../utils/generate-quarterly-chart-data';
 
 export default Ember.Component.extend({
     xAxisLabels: function(){
@@ -21,7 +21,7 @@ export default Ember.Component.extend({
                                         return [3,6,9,12].includes(record.get('month'));
                                     })
                                     .sortBy('year','month')
-        return generateChartData(accountTypes,labels,quarterlyRecords,'balance_end');
+        return generateQuarterlyChartData(accountTypes,labels,quarterlyRecords,'balance_end');
     }.property('accountRecords', 'xAxisLabels'),
     chartOptions: {
         title: {
