@@ -15,11 +15,20 @@ export default Ember.Component.extend({
         let labelArray = [];
         let colorArray = [];
         accountTypes.forEach(function(accountType){
-            dataArray.push(assetRecords.filterBy('account_type',accountType).reduce(function(a,b){
-                const currentDate = a.get('year')+a.get('month')/100;
-                const nextDate = b.get('year')+b.get('month')/100;
-                return currentDate > nextDate ? a : b;
-            }).get('balance_end'));
+            dataArray.push(assetRecords.filterBy('account_type',accountType)
+                .reduce(function (a,b) {
+                    let currentDate = a.get('year')+a.get('month')/100;
+                    let nextDate = b.get('year')+b.get('month')/100;
+                    if (currentDate === nextDate) {
+                        let combinedBalance = a.get('balance_end') + b.get('balance_end');
+                        b.set('balance_end', combinedBalance);
+                        return b;
+                    } else if (currentDate > nextDate) {
+                        return a;
+                    } else {
+                        return b;
+                    }
+                }).get('balance_end'));
             labelArray.push(accountType);
             colorArray.push(colorLookup[accountType]||"pink");
         })
