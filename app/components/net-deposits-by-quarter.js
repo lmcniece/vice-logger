@@ -13,7 +13,6 @@ export default Ember.Component.extend({
 
     quarterlyAccountData: function(){
         //Generate an object of all labels - will be used to fill/offset account types with null records
-        
         let labels = {};
         this.get('xAxisLabels').forEach(function (label) {
              labels[label]=0;
@@ -30,7 +29,7 @@ export default Ember.Component.extend({
             let yearQuarter = record.get('yearQuarterLabel');
             //If this is the first record for a YYYY-QQ, set to zero
             if (!records[yearQuarter]) { records[yearQuarter] = 0; }
-            records[yearQuarter] += record.get('netChange');
+            records[yearQuarter] += record.get('netDeposits');
         });
         Object.assign(dataArray, records);
         return dataArray;
@@ -39,7 +38,7 @@ export default Ember.Component.extend({
     chartOptions: {
         title: {
             display: true,
-            text: 'Net Change',
+            text: 'Net Deposits',
             fontColor: '#ccc',
             fontSize: 16
         },
@@ -60,7 +59,7 @@ export default Ember.Component.extend({
             labels: this.get('xAxisLabels'),
             datasets: [{
                 data: Object.values(this.get('quarterlyAccountData')),
-                backgroundColor: '#3a3'
+                backgroundColor: '#a33'
             }]
         }
     })

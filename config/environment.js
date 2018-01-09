@@ -30,6 +30,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.APP.API_HOST = 'http://localhost:3000'
+    // ENV.APP.API_HOST = 'https://vice-server.herokuapp.com'
   }
 
   if (environment === 'test') {
